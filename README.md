@@ -25,3 +25,27 @@ You should be able to curl it now
 kubectl delete -f nginx-deployment.yaml
 kubectl delete -f nginx-service.yaml
 ```
+
+### Namespaces
+```
+kubectl apply -f namespace-example.yaml
+kubectl get namespaces
+```
+
+#### Create a ResourceQuota object, limit running pods in namespace to 2
+```
+kubectl apply -f pod-quota.yaml --namespace=namespace-example
+```
+
+#### Deploy nginx with 3 pods into the namespaces
+```
+kubectl apply -f nginx-deployment.yaml --namespace=namespace-example
+kubectl get deployment nginx-deployment --namespace=namespace-example
+kubectl get deployment nginx-deployment --namespace=namespace-example --output=yaml
+```
+Only 2 replicas are allowed
+
+#### Delete namespaces
+```
+kubectl delete -f namespace-example.yaml
+```
